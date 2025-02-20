@@ -1,0 +1,467 @@
+/* General Styles */
+body {
+    font-family: 'Share Tech Mono', monospace; /* Tech-like font */
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #00ff00; /* Neon green */
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+h1, h2, h3 {
+    color: #00ff00;
+}
+
+.highlight {
+    color: #ff00ff; /* Neon pink */
+}
+
+/* Navbar */
+.navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2a2a2a; /* Navbar background color */
+    z-index: 1000;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-menu li {
+    margin: 0 15px;
+}
+
+.nav-link {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: small;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff00ff;
+}
+
+/* Hamburger Menu */
+.navbar-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #00ff00;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+/* Import the tech-like font */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* Section Headers */
+.section-header {
+    font-size: 3rem;
+    color: #00ff00;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00;
+    }
+    to {
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 80px #00ff00;
+    }
+}
+/* Welcome Section */
+.welcome-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #1e1e1e, #000);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.welcome-content h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.welcome-content p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    animation: slideIn 1.5s ease-in-out;
+}
+#welcomeButton{
+    z-index: 1;
+    font-size: -webkit-xxx-large;
+    padding: 10px 80px;
+    border-radius: 10px;
+    color: #06d206;
+    border-width: thick;
+    border-color: #00ff00;
+    background: none;
+    animation: glow 2s infinite alternate;
+    position:relative;
+}
+
+/* Skills Section */
+.skills-section {
+    min-height: 100vh;
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.skills-list span {
+    background-color: #00ff00;
+    color: #1e1e1e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Projects Section */
+.projects-section {
+    min-height: 100vh;
+    padding: 50px 20px;
+    background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #00ff00;
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #00ff00;
+}
+
+.card p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    color: #00ff00;
+}
+
+/* Contact Section */
+.contact-section {
+    min-height: 100vh;
+    padding: 50px 20px;
+    background-color: #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    z-index: 1;
+}
+
+.btn {
+    background-color: #1e1e1e;
+    border: 2px solid #00ff00;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #00ff00;
+    background-color: #00ff00;
+}
+
+.btn i {
+    font-size: 40px;
+    color: #00ff00;
+    transition: color 0.3s ease;
+}
+
+.btn:hover i {
+    color: #1e1e1e;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    background-color: #2a2a2a;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+iframe {
+    width: 100%;
+    height: 315px;
+    border: none;
+    border-radius: 10px;
+}
+
+#modal-description, #modal-tools,#modal-link {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    justify-items: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+
+
+/* Binary Animation */
+#binaryAnimation {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.binary-column {
+    width: 20px; /* Adjust based on font size */
+    font-size: 18px;
+    color: rgba(0, 255, 0, 0.5);
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+    white-space: nowrap;
+    animation: scrollBinary linear infinite;
+}
+
+@keyframes scrollBinary {
+    to {
+        transform: translateX(100vw);
+    }
+}
+
+/* Skills Section */
+.skills-section {
+    min-height: 100vh;
+    padding: 50px 20px;
+    background-color: #2a2a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.skills-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    gap: 40px;
+}
+
+@media screen and (max-width: 768px) {
+    .skills-container {
+        display: block;
+    }
+}
+
+.about-me {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #00ff00;
+    margin-bottom: 20px;
+}
+
+.description {
+    color: #00ff00;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.skills-cards {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+}
+
+.skill-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #00ff00;
+}
+
+.skill-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.skill-card p {
+    color: #00ff00;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Grid Lines Background */
+#gridBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: radial-gradient(circle, transparent 20%, #1e1e1e 20%, #1e1e1e 80%, transparent 80%, transparent),
+                radial-gradient(circle, transparent 20%, #1e1e1e 20%, #1e1e1e 80%, transparent 80%, transparent) 50px 50px;
+    background-size: 100px 100px;
+    opacity: 0.2;
+    animation: moveGrid 10s linear infinite;
+}
+
+@keyframes moveGrid {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 100px 100px;
+    }
+}
+#particleCanvas{
+    position: absolute;
+}
