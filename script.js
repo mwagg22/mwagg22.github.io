@@ -69,6 +69,14 @@ const projects = [
         tools: "Python, Selenium",
         image: "images/bot.png",
         link: "https://github.com/mwagg22/igbot"
+    },
+    {
+        title: "Sonic OpenGym ML",
+        videoUrl: "videos/sonicAI.mp4",
+        description: "Reinforcement learning to play sonic the hedgehog 2",
+        tools: "Python, OpenAI",
+        image: "images/sonic.png",
+        link: ""
     }
 ];
 
