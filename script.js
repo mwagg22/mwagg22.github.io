@@ -20,7 +20,7 @@ const projects = [
         tools: "HTML, CSS, JavaScript,flask,openai",
         image: "images/learning.png",
         link: "",
-        demo: "https://testsitearab.lovestoblog.com/"
+        demo: "https://bayan-app.netlify.app/"
     },
     {
         title: "3D Vulkan Rpg",
