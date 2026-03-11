@@ -7,67 +7,152 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              brand: {
+                50: "#eef2ff",
+                100: "#e0e7ff",
+                200: "#c7d2fe",
+                300: "#a5b4fc",
+                400: "#818cf8",
+                500: "#6366f1",
+                600: "#4f46e5",
+                700: "#4338ca",
+                800: "#3730a3",
+                900: "#312e81",
+              },
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      :root {
-        --primary: #3b82f6;
-        --primary-dark: #1d4ed8;
-        --secondary: #10b981;
-        --dark: #0f172a;
-        --light: #f8fafc;
+      * {
+        scroll-behavior: smooth;
       }
 
       body {
         font-family: "Inter", sans-serif;
-        background-color: var(--dark);
-        color: var(--light);
-        scroll-behavior: smooth;
+        background: #0a0a0f;
+        color: #e2e8f0;
+        overflow-x: hidden;
       }
 
-      .gradient-bg {
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      /* Animated gradient orbs */
+      .gradient-orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+        pointer-events: none;
+        z-index: 0;
       }
 
-      .card-gradient {
-        background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, #6366f1, transparent 70%);
+        top: -200px;
+        right: -200px;
+        animation: orbFloat1 20s ease-in-out infinite;
       }
 
-      .skill-icon {
-        transition: all 0.3s ease;
+      .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, #8b5cf6, transparent 70%);
+        bottom: -150px;
+        left: -150px;
+        animation: orbFloat2 25s ease-in-out infinite;
       }
 
-      .skill-icon:hover {
-        transform: translateY(-5px);
-        filter: drop-shadow(0 5px 15px rgba(59, 130, 246, 0.5));
+      .orb-3 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, #06b6d4, transparent 70%);
+        top: 50%;
+        left: 50%;
+        animation: orbFloat3 18s ease-in-out infinite;
       }
 
-      .project-card {
-        transition: all 0.3s ease;
-        overflow: hidden;
-        cursor: pointer;
+      @keyframes orbFloat1 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        33% {
+          transform: translate(-100px, 100px);
+        }
+        66% {
+          transform: translate(50px, -50px);
+        }
       }
 
-      .project-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      @keyframes orbFloat2 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        33% {
+          transform: translate(80px, -60px);
+        }
+        66% {
+          transform: translate(-40px, 80px);
+        }
       }
 
-      .project-card img {
-        transition: transform 0.5s ease;
+      @keyframes orbFloat3 {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+        }
+        33% {
+          transform: translate(-30%, -70%);
+        }
+        66% {
+          transform: translate(-70%, -30%);
+        }
       }
 
-      .project-card:hover img {
-        transform: scale(1.05);
+      /* Glass morphism */
+      .glass {
+        background: rgba(15, 15, 25, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
       }
 
+      .glass-card {
+        background: rgba(20, 20, 35, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .glass-card:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        box-shadow: 0 8px 32px rgba(99, 102, 241, 0.15);
+        transform: translateY(-4px);
+      }
+
+      /* Nav */
       .nav-link {
         position: relative;
+        padding-bottom: 4px;
       }
 
       .nav-link::after {
@@ -75,473 +160,482 @@
         position: absolute;
         width: 0;
         height: 2px;
-        bottom: -5px;
-        left: 0;
-        background-color: var(--primary);
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        border-radius: 2px;
         transition: width 0.3s ease;
       }
 
-      .nav-link:hover::after {
+      .nav-link:hover::after,
+      .nav-link.active::after {
         width: 100%;
       }
 
-      .floating {
-        animation: floating 3s ease-in-out infinite;
+      /* Hero text gradient */
+      .gradient-text {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      @keyframes floating {
-        0% {
-          transform: translate(0, 0px);
-        }
-        50% {
-          transform: translate(0, 15px);
-        }
-        100% {
-          transform: translate(0, -0px);
-        }
+      /* Skill cards */
+      .skill-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .typewriter {
+      .skill-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      }
+
+      .skill-card:hover .skill-icon-img {
+        filter: drop-shadow(0 0 12px rgba(99, 102, 241, 0.6));
+      }
+
+      .skill-icon-img {
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      /* Project cards */
+      .project-card {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         overflow: hidden;
-        border-right: 2px solid var(--primary);
-        white-space: nowrap;
-        margin: 0 auto;
-        animation: typing 3.5s steps(40, end),
-          blink-caret 0.75s step-end infinite;
       }
 
-      @keyframes typing {
-        from {
-          width: 0;
-        }
-        to {
-          width: 100%;
-        }
+      .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(99, 102, 241, 0.4);
       }
 
-      @keyframes blink-caret {
-        from,
-        to {
-          border-color: transparent;
+      .project-card:hover .project-image {
+        transform: scale(1.08);
+      }
+
+      .project-image {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Featured project */
+      .featured-glow {
+        position: relative;
+      }
+
+      .featured-glow::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 1.25rem;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4, #6366f1);
+        background-size: 300% 300%;
+        animation: glowShift 4s ease infinite;
+        z-index: -1;
+        opacity: 0.6;
+      }
+
+      @keyframes glowShift {
+        0%, 100% {
+          background-position: 0% 50%;
         }
         50% {
-          border-color: var(--primary);
+          background-position: 100% 50%;
         }
       }
 
-      .particle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(59, 130, 246, 0.5);
-        pointer-events: none;
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      /* Modal Styles */
-      .modal {
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      /* Modal */
+      .modal-overlay {
         display: none;
         position: fixed;
         z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(5px);
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
 
-      .modal-content {
-        background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
-        margin: 5% auto;
-        padding: 30px;
-        border-radius: 16px;
-        width: 90%;
-        max-width: 800px;
-        position: relative;
-        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-      }
-
-      .close {
-        color: #94a3b8;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: color 0.3s;
-      }
-
-      .close:hover {
-        color: #f1f5f9;
-      }
-
-      .modal-video {
-        width: 100%;
-        height: 400px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-      }
-
-      .modal-info {
-        color: #cbd5e1;
-      }
-
-      .modal-info h3 {
-        color: #f1f5f9;
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-      }
-
-      .modal-links {
-        margin-top: 20px;
+      .modal-overlay.active {
         display: flex;
-        gap: 15px;
-      }
-
-      .modal-link {
-        display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 10px 20px;
-        background: #3b82f6;
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: background 0.3s;
+        justify-content: center;
       }
 
-      .modal-link:hover {
-        background: #2563eb;
+      .modal-box {
+        background: linear-gradient(145deg, #141425 0%, #1e1e35 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.5rem;
+        max-width: 800px;
+        width: 92%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+        position: relative;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+        animation: modalIn 0.3s ease;
       }
 
-      .modal-link.github {
-        background: #374151;
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
       }
 
-      .modal-link.github:hover {
-        background: #4b5563;
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        color: #94a3b8;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+      }
+
+      /* Section divider */
+      .section-divider {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(99, 102, 241, 0.3),
+          transparent
+        );
+      }
+
+      /* Floating animation */
+      .float {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #0a0a0f;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #2a2a3e;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3a3a5e;
+      }
+
+      /* Category pills */
+      .category-pill {
+        transition: all 0.2s ease;
+      }
+
+      .category-pill:hover,
+      .category-pill.active {
+        background: rgba(99, 102, 241, 0.2);
+        border-color: rgba(99, 102, 241, 0.5);
+        color: #a5b4fc;
       }
     </style>
   </head>
-  <body class="gradient-bg">
+  <body>
+    <!-- Animated background orbs -->
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md py-4">
+    <nav class="fixed w-full z-50 glass py-4 transition-all duration-300" id="navbar">
       <div class="container mx-auto px-6 flex justify-between items-center">
-        <div class="text-xl font-bold text-white">
-          <span class="text-blue-500">MW</span>
+        <a href="#hero" class="text-2xl font-bold tracking-tight">
+          <span class="gradient-text">MW</span>
+        </a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#hero" class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium">Home</a>
+          <a href="#skills" class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium">Skills</a>
+          <a href="#projects" class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium">Projects</a>
+          <a href="#contact" class="nav-link text-slate-300 hover:text-white transition-colors text-sm font-medium">Contact</a>
+          <a href="https://github.com/mwagg22" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+            <i class="fab fa-github text-lg"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/muhammed-waggeh-1b896913a/" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+            <i class="fab fa-linkedin text-lg"></i>
+          </a>
         </div>
-        <div class="hidden md:flex space-x-8">
-          <a
-            href="#welcome"
-            class="nav-link text-slate-300 hover:text-white transition-colors"
-            >Home</a
-          >
-          <a
-            href="#skills"
-            class="nav-link text-slate-300 hover:text-white transition-colors"
-            >Skills</a
-          >
-          <a
-            href="#projects"
-            class="nav-link text-slate-300 hover:text-white transition-colors"
-            >Projects</a
-          >
-          <a
-            href="#contact"
-            class="nav-link text-slate-300 hover:text-white transition-colors"
-            >Contact</a
-          >
-        </div>
-        <div class="md:hidden">
-          <button
-            id="mobile-menu-button"
-            class="text-slate-300 hover:text-white"
-          >
-            <i class="fas fa-bars text-xl"></i>
-          </button>
-        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white transition-colors">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
       </div>
 
-      <!-- Mobile Menu -->
-      <div
-        id="mobile-menu"
-        class="md:hidden hidden bg-slate-800/95 backdrop-blur-md py-4"
-      >
-        <div class="container mx-auto px-6 flex flex-col space-y-4">
-          <a
-            href="#welcome"
-            class="text-slate-300 hover:text-white transition-colors py-2"
-            >Home</a
-          >
-          <a
-            href="#skills"
-            class="text-slate-300 hover:text-white transition-colors py-2"
-            >Skills</a
-          >
-          <a
-            href="#projects"
-            class="text-slate-300 hover:text-white transition-colors py-2"
-            >Projects</a
-          >
-          <a
-            href="#contact"
-            class="text-slate-300 hover:text-white transition-colors py-2"
-            >Contact</a
-          >
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="md:hidden hidden">
+        <div class="container mx-auto px-6 py-4 flex flex-col space-y-4 border-t border-white/5 mt-4">
+          <a href="#hero" class="text-slate-300 hover:text-white transition-colors py-2">Home</a>
+          <a href="#skills" class="text-slate-300 hover:text-white transition-colors py-2">Skills</a>
+          <a href="#projects" class="text-slate-300 hover:text-white transition-colors py-2">Projects</a>
+          <a href="#contact" class="text-slate-300 hover:text-white transition-colors py-2">Contact</a>
+          <div class="flex space-x-4 pt-2">
+            <a href="https://github.com/mwagg22" target="_blank" class="text-slate-400 hover:text-white"><i class="fab fa-github text-lg"></i></a>
+            <a href="https://www.linkedin.com/in/muhammed-waggeh-1b896913a/" target="_blank" class="text-slate-400 hover:text-white"><i class="fab fa-linkedin text-lg"></i></a>
+          </div>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section
-      id="welcome"
-      class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16"
-    >
-      <!-- Animated Background -->
-      <div id="particles-container" class="absolute inset-0 z-0"></div>
-
-      <div class="container mx-auto px-6 z-10">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-          <div class="md:w-1/2 mb-10 md:mb-0 w-full">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">
-              Hi, I'm <span class="text-blue-500">Mo Waggeh</span>
-            </h1>
-            <div class="text-xl md:text-2xl text-slate-300 mb-6 typewriter">
-              Full Stack Developer & Programming Enthusiast
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div class="lg:w-1/2 text-center lg:text-left">
+            <div class="reveal">
+              <p class="text-brand-400 font-mono text-sm mb-4 tracking-widest uppercase">Full Stack Developer</p>
+              <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+                Hi, I'm<br />
+                <span class="gradient-text">Mo Waggeh</span>
+              </h1>
             </div>
-            <p class="text-slate-400 mb-8 max-w-lg">
-              I build scalable web applications and solve complex problems with
-              modern technologies.
-            </p>
-            <div class="flex space-x-4">
-              <a
-                href="#projects"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                View My Work
+            <div class="reveal reveal-delay-1">
+              <p class="text-lg md:text-xl text-slate-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                I build scalable applications, tinker with game engines, and ship
+                products that people love &#8212; from mobile apps to modded games.
+              </p>
+            </div>
+            <div class="reveal reveal-delay-2 flex flex-wrap gap-4 justify-center lg:justify-start">
+              <a href="#projects" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-brand-600/25 hover:shadow-brand-500/40">
+                <i class="fas fa-rocket text-sm"></i> View My Work
               </a>
-              <a
-                href="#contact"
-                class="border border-slate-600 hover:border-blue-500 text-slate-300 hover:text-blue-400 px-6 py-3 rounded-lg font-medium transition-colors"
-              >
-                Get In Touch
+              <a href="#contact" class="inline-flex items-center gap-2 border border-slate-700 hover:border-brand-500/50 text-slate-300 hover:text-brand-300 px-7 py-3.5 rounded-xl font-semibold transition-all duration-300">
+                <i class="fas fa-paper-plane text-sm"></i> Get In Touch
               </a>
             </div>
           </div>
-          <div class="md:w-1/2 flex justify-center">
-            <div class="relative w-64 h-64 md:w-80 md:h-80">
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full opacity-20 blur-xl"
-              ></div>
-              <div
-                class="relative w-full h-full bg-slate-800 rounded-full flex items-center justify-center overflow-hidden border-4 border-slate-700"
-              >
+          <div class="lg:w-1/2 flex justify-center reveal reveal-delay-3">
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-brand-500/20 to-cyan-500/20 rounded-full blur-3xl scale-110"></div>
+              <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-2 border-white/10 float">
+                <div class="absolute inset-0 bg-gradient-to-br from-brand-900/50 to-transparent"></div>
                 <img
                   src="avatar.png"
                   alt="Mo Waggeh"
-                  class="w-3/4 h-3/4 object-contain floating"
+                  class="w-full h-full object-contain p-8"
                 />
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mt-20 flex justify-center">
-          <a
-            href="#skills"
-            class="text-slate-400 hover:text-white animate-bounce"
-          >
-            <i class="fas fa-chevron-down text-2xl"></i>
+        <div class="mt-16 flex justify-center reveal reveal-delay-4">
+          <a href="#skills" class="text-slate-500 hover:text-brand-400 transition-colors">
+            <i class="fas fa-chevron-down text-xl animate-bounce"></i>
           </a>
         </div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-slate-800/50">
+    <section id="skills" class="py-24 relative z-10">
       <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-          Skills & Expertise
-        </h2>
-        <p class="text-slate-400 text-center max-w-2xl mx-auto mb-12">
-          I specialize in building modern web applications using cutting-edge
-          technologies.
-        </p>
+        <div class="text-center mb-16 reveal">
+          <p class="text-brand-400 font-mono text-sm mb-3 tracking-widest uppercase">What I Work With</p>
+          <h2 class="text-4xl md:text-5xl font-black mb-4">Skills &amp; Expertise</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+            From front-end frameworks to low-level graphics programming, here's my toolkit.
+          </p>
+        </div>
 
-        <div class="flex flex-col md:flex-row gap-8">
-          <div class="md:w-1/3">
-            <div class="card-gradient rounded-2xl p-8 h-full">
-              <div class="flex flex-col items-center text-center">
-                <div
-                  class="w-24 h-24 rounded-full bg-slate-700 flex items-center justify-center mb-6"
-                >
-                  <i class="fas fa-user text-blue-500 text-3xl"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-4">About Me</h3>
-                <p class="text-slate-300">
-                  Hi! I'm a programming enthusiast with expertise in building
-                  scalable web and large enterprise applications. I love solving
-                  complex problems and creating user-friendly experiences. When
-                  I'm not coding, you can find me exploring new technologies
-                  just to challenge myself.
-                </p>
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- About Me -->
+          <div class="lg:w-1/3 reveal">
+            <div class="glass-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
+              <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-brand-600 to-purple-600 flex items-center justify-center mb-6 shadow-lg shadow-brand-600/20">
+                <i class="fas fa-user text-white text-2xl"></i>
               </div>
+              <h3 class="text-xl font-bold mb-4">About Me</h3>
+              <p class="text-slate-400 leading-relaxed">
+                Programming enthusiast with a passion for building scalable web applications,
+                enterprise solutions, and creative game mods. I love pushing boundaries &#8212;
+                whether it's shipping a mobile app or modding Quake engines. When I'm
+                not coding, I'm exploring new tech just to challenge myself.
+              </p>
             </div>
           </div>
 
-          <div class="md:w-2/3">
-            <div class="card-gradient rounded-2xl p-8 h-full">
-              <h3 class="text-xl font-bold mb-6">Technologies I Work With</h3>
-              <div
-                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
-              >
-                <!-- Skill Cards -->
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/java.svg"
-                      alt="Java"
-                      class="w-8 h-8"
-                    />
+          <!-- Skills Grid -->
+          <div class="lg:w-2/3 reveal reveal-delay-1">
+            <div class="glass-card rounded-2xl p-8 h-full">
+              <h3 class="text-xl font-bold mb-2">Technologies I Work With</h3>
+              <p class="text-slate-500 text-sm mb-6">Languages, frameworks, tools &amp; certifications</p>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4" id="skills-grid">
+                <!-- Skills injected by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Featured Project: When App -->
+    <section id="featured" class="py-24 relative z-10">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16 reveal">
+          <p class="text-brand-400 font-mono text-sm mb-3 tracking-widest uppercase">Featured Project</p>
+          <h2 class="text-4xl md:text-5xl font-black mb-4">when</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+            Words that arrive at the perfect moment.
+          </p>
+        </div>
+
+        <div class="featured-glow rounded-2xl reveal">
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="flex flex-col lg:flex-row">
+              <!-- Left: Info -->
+              <div class="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="text-3xl">&#10024;&#128140;&#127811;</span>
+                  <span class="bg-brand-600/20 text-brand-300 text-xs font-bold px-3 py-1.5 rounded-full border border-brand-500/30 uppercase tracking-wider">Closed Beta</span>
+                </div>
+                <h3 class="text-3xl md:text-4xl font-black mb-4 leading-tight">
+                  Messages that wait for the <span class="gradient-text">perfect moment</span>
+                </h3>
+                <p class="text-slate-400 mb-6 leading-relaxed">
+                  Send letters that unlock when your loved ones are at the right place,
+                  the right time, or in the right mood. Not just another chat app &#8212;
+                  a new way to connect.
+                </p>
+
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-map-marker-alt text-brand-400"></i> Location Triggers
                   </div>
-                  <span class="text-sm font-medium">Java</span>
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-clock text-brand-400"></i> Date &amp; Time
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-heart text-brand-400"></i> Mood-Based Delivery
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-cloud-sun text-brand-400"></i> Weather Triggers
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-image text-brand-400"></i> Rich Media Letters
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-slate-300">
+                    <i class="fas fa-hourglass-half text-brand-400"></i> Time Capsules
+                  </div>
                 </div>
 
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg"
-                      alt="JavaScript"
-                      class="w-8 h-8"
-                    />
-                  </div>
-                  <span class="text-sm font-medium">JavaScript</span>
+                <div class="flex flex-wrap gap-2 mb-8">
+                  <span class="bg-white/5 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-white/10">Node.js</span>
+                  <span class="bg-white/5 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-white/10">React Native</span>
+                  <span class="bg-white/5 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-white/10">Expo</span>
+                  <span class="bg-white/5 text-slate-300 text-xs px-3 py-1.5 rounded-full border border-white/10">Vercel</span>
                 </div>
 
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/react.svg"
-                      alt="React"
-                      class="w-8 h-8"
-                    />
-                  </div>
-                  <span class="text-sm font-medium">React</span>
+                <div class="flex flex-wrap gap-3">
+                  <a href="https://when-beta-signups.vercel.app/" target="_blank" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-brand-600/25 text-sm">
+                    <i class="fas fa-external-link-alt"></i> Visit Landing Page
+                  </a>
                 </div>
+              </div>
 
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg"
-                      alt="Python"
-                      class="w-8 h-8"
-                    />
+              <!-- Right: How It Works -->
+              <div class="lg:w-1/2 p-8 md:p-12 bg-white/[0.02] border-t lg:border-t-0 lg:border-l border-white/5">
+                <h4 class="text-lg font-bold mb-8 text-slate-300">How it works</h4>
+                <div class="space-y-8">
+                  <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-brand-600/20 flex items-center justify-center text-brand-400">
+                      <span class="text-lg">&#9999;&#65039;</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-sm text-slate-200 mb-1">Step 01 &#8212; Write a letter</p>
+                      <p class="text-slate-500 text-sm">Pour your heart out with rich text, voice notes, drawings, and custom stamps.</p>
+                    </div>
                   </div>
-                  <span class="text-sm font-medium">Python</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nextdotjs.svg"
-                      alt="Next.js"
-                      class="w-8 h-8"
-                    />
+                  <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-600/20 flex items-center justify-center text-purple-400">
+                      <span class="text-lg">&#128302;</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-sm text-slate-200 mb-1">Step 02 &#8212; Set a trigger</p>
+                      <p class="text-slate-500 text-sm">Choose when it unlocks: a location, a date, a mood, the weather, or a combination.</p>
+                    </div>
                   </div>
-                  <span class="text-sm font-medium">Next.js</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/tailwindcss.svg"
-                      alt="Tailwind CSS"
-                      class="w-8 h-8"
-                    />
+                  <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-pink-600/20 flex items-center justify-center text-pink-400">
+                      <span class="text-lg">&#128140;</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-sm text-slate-200 mb-1">Step 03 &#8212; It waits patiently</p>
+                      <p class="text-slate-500 text-sm">Your letter sleeps until the conditions are met. No peeking allowed.</p>
+                    </div>
                   </div>
-                  <span class="text-sm font-medium">Tailwind CSS</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/springboot.svg"
-                      alt="Spring Boot"
-                      class="w-8 h-8"
-                    />
+                  <div class="flex gap-4">
+                    <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-600/20 flex items-center justify-center text-cyan-400">
+                      <span class="text-lg">&#10024;</span>
+                    </div>
+                    <div>
+                      <p class="font-semibold text-sm text-slate-200 mb-1">Step 04 &#8212; Magic moment</p>
+                      <p class="text-slate-500 text-sm">When the stars align, the letter soars in. A notification, an animation, and pure joy.</p>
+                    </div>
                   </div>
-                  <span class="text-sm font-medium">Spring Boot</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/amazonaws.svg"
-                      alt="AWS"
-                      class="w-8 h-8"
-                    />
-                  </div>
-                  <span class="text-sm font-medium">AWS</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/vercel.svg"
-                      alt="Vercel"
-                      class="w-8 h-8"
-                    />
-                  </div>
-                  <span class="text-sm font-medium">Vercel</span>
-                </div>
-
-                <div
-                  class="skill-card flex flex-col items-center p-4 rounded-xl bg-slate-700/50 hover:bg-slate-700 transition-colors"
-                >
-                  <div
-                    class="w-12 h-12 flex items-center justify-center mb-2 skill-icon"
-                  >
-                    <img
-                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/unity.svg"
-                      alt="Unity"
-                      class="w-8 h-8"
-                    />
-                  </div>
-                  <span class="text-sm font-medium">Unity</span>
                 </div>
               </div>
             </div>
@@ -549,200 +643,284 @@
         </div>
       </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
+    <section id="projects" class="py-24 relative z-10">
       <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-          My Projects
-        </h2>
-        <p class="text-slate-400 text-center max-w-2xl mx-auto mb-12">
-          Here are some of the projects I've worked on, from web applications to
-          game development.
-        </p>
+        <div class="text-center mb-16 reveal">
+          <p class="text-brand-400 font-mono text-sm mb-3 tracking-widest uppercase">My Work</p>
+          <h2 class="text-4xl md:text-5xl font-black mb-4">Projects</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+            From web applications to game development, here's what I've been building.
+          </p>
+        </div>
 
-        <div
-          id="projects-container"
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          <!-- Project cards will be dynamically generated here -->
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+          <button class="category-pill px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-slate-400 active" data-category="all">All</button>
+          <button class="category-pill px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-slate-400" data-category="web">Web Apps</button>
+          <button class="category-pill px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-slate-400" data-category="game">Game Dev</button>
+          <button class="category-pill px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-slate-400" data-category="ai">AI / ML</button>
+          <button class="category-pill px-4 py-2 rounded-full text-sm font-medium border border-white/10 text-slate-400" data-category="tools">Tools</button>
+        </div>
+
+        <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Project cards dynamically generated -->
         </div>
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-slate-800/50">
+    <section id="contact" class="py-24 relative z-10">
       <div class="container mx-auto px-6">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
-          Get In Touch
-        </h2>
-        <p class="text-slate-400 text-center max-w-2xl mx-auto mb-12">
-          Have a project in mind or want to collaborate? Feel free to reach out!
-        </p>
-
-        <div class="max-w-md mx-auto card-gradient rounded-2xl p-8">
-          <form id="contact-form" class="space-y-6">
-            <div>
-              <label for="name" class="block text-slate-300 mb-2">Name</label>
-              <input
-                type="text"
-                id="name"
-                class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                required
-              />
-            </div>
-
-            <div>
-              <label for="email" class="block text-slate-300 mb-2">Email</label>
-              <input
-                type="email"
-                id="email"
-                class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                required
-              />
-            </div>
-
-            <div>
-              <label for="message" class="block text-slate-300 mb-2"
-                >Message</label
-              >
-              <textarea
-                id="message"
-                rows="5"
-                class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                required
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg transition-colors"
-            >
-              Send Message
-            </button>
-          </form>
+        <div class="text-center mb-16 reveal">
+          <p class="text-brand-400 font-mono text-sm mb-3 tracking-widest uppercase">Let's Connect</p>
+          <h2 class="text-4xl md:text-5xl font-black mb-4">Get In Touch</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+            Have a project in mind or want to collaborate? Feel free to reach out.
+          </p>
         </div>
 
-        <div class="flex justify-center space-x-8 mt-12">
+        <div class="max-w-lg mx-auto reveal">
+          <div class="glass-card rounded-2xl p-8">
+            <form id="contact-form" class="space-y-5">
+              <div>
+                <label for="name" class="block text-slate-300 text-sm font-medium mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition-all"
+                  placeholder="Your name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-slate-300 text-sm font-medium mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition-all"
+                  placeholder="you@example.com"
+                  required
+                />
+              </div>
+              <div>
+                <label for="message" class="block text-slate-300 text-sm font-medium mb-2">Message</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition-all resize-none"
+                  placeholder="Tell me about your project..."
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-brand-600/25 hover:shadow-brand-500/40"
+              >
+                Send Message <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="flex justify-center gap-6 mt-12 reveal reveal-delay-1">
           <a
             href="https://www.linkedin.com/in/muhammed-waggeh-1b896913a/"
             target="_blank"
-            class="text-slate-400 hover:text-blue-400 transition-colors text-2xl"
+            class="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-brand-400 transition-all"
           >
-            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-linkedin text-xl"></i>
           </a>
           <a
             href="https://github.com/mwagg22"
             target="_blank"
-            class="text-slate-400 hover:text-blue-400 transition-colors text-2xl"
+            class="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-brand-400 transition-all"
           >
-            <i class="fab fa-github"></i>
+            <i class="fab fa-github text-xl"></i>
           </a>
           <a
             href="mailto:mwaggeh22@gmail.com"
-            class="text-slate-400 hover:text-blue-400 transition-colors text-2xl"
+            class="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-slate-400 hover:text-brand-400 transition-all"
           >
-            <i class="fas fa-envelope"></i>
+            <i class="fas fa-envelope text-xl"></i>
           </a>
         </div>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-slate-700">
-      <div class="container mx-auto px-6 text-center">
-        <p class="text-slate-400">
-          &copy; 2023 Mo Waggeh. All rights reserved.
+    <footer class="py-8 border-t border-white/5 relative z-10">
+      <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+        <p class="text-slate-500 text-sm">
+          &copy; 2026 Mo Waggeh. All rights reserved.
+        </p>
+        <p class="text-slate-600 text-xs font-mono">
+          Built with passion &amp; too much caffeine
         </p>
       </div>
     </footer>
 
     <!-- Project Modal -->
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <video id="modal-video" class="modal-video" controls>
+    <div id="modal" class="modal-overlay" role="dialog" aria-modal="true">
+      <div class="modal-box">
+        <button class="modal-close" id="modal-close-btn" aria-label="Close modal">
+          <i class="fas fa-times"></i>
+        </button>
+        <video id="modal-video" class="w-full rounded-xl mb-6" controls style="max-height: 400px; display: none;">
           Your browser does not support the video tag.
         </video>
-        <div class="modal-info">
-          <h3 id="modal-title"></h3>
-          <p id="modal-description"></p>
-          <p><strong>Tools used:</strong> <span id="modal-tools"></span></p>
-          <div class="modal-links" id="modal-links">
-            <!-- Links will be added dynamically -->
-          </div>
+        <h3 id="modal-title" class="text-2xl font-bold mb-3"></h3>
+        <p id="modal-description" class="text-slate-400 mb-4 leading-relaxed"></p>
+        <p class="text-slate-500 text-sm mb-5">
+          <span class="font-semibold text-slate-300">Tools:</span>
+          <span id="modal-tools"></span>
+        </p>
+        <div id="modal-links" class="flex flex-wrap gap-3">
+          <!-- Dynamic -->
         </div>
       </div>
     </div>
 
     <script>
-      // Project data - modular like your original version
-      const projects = [
+      // Skills Data
+      var skills = [
+        { name: "Java", icon: "java" },
+        { name: "JavaScript", icon: "javascript" },
+        { name: "Python", icon: "python" },
+        { name: "C", icon: "c", customUrl: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/c.svg" },
+        { name: "C++", icon: "cplusplus" },
+        { name: "React", icon: "react" },
+        { name: "React Native", icon: "react", label: "React Native" },
+        { name: "Next.js", icon: "nextdotjs" },
+        { name: "Spring Boot", icon: "springboot" },
+        { name: "Tailwind CSS", icon: "tailwindcss" },
+        { name: "Node.js", icon: "nodedotjs" },
+        { name: "AWS", icon: "amazonaws" },
+        { name: "Vercel", icon: "vercel" },
+        { name: "Unity", icon: "unity" },
+        { name: "Splunk", icon: "splunk" },
+        { name: "CySA+", icon: "comptia", label: "CySA+", customUrl: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/comptia.svg" }
+      ];
+
+      function renderSkills() {
+        var grid = document.getElementById("skills-grid");
+        skills.forEach(function(skill) {
+          var iconUrl =
+            skill.customUrl ||
+            "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/" + skill.icon + ".svg";
+          var el = document.createElement("div");
+          el.className =
+            "skill-card flex flex-col items-center gap-2 p-4 rounded-xl bg-white/[0.03] border border-white/5 hover:border-brand-500/30 cursor-default";
+          el.innerHTML =
+            '<div class="w-10 h-10 flex items-center justify-center">' +
+              '<img src="' + iconUrl + '" alt="' + skill.name + '" class="w-7 h-7 skill-icon-img" />' +
+            '</div>' +
+            '<span class="text-xs font-medium text-slate-300">' + (skill.label || skill.name) + '</span>';
+          grid.appendChild(el);
+        });
+      }
+
+      // Projects Data
+      var projects = [
+        {
+          title: "When \u2014 Letter Writing App",
+          videoUrl: "",
+          description:
+            "An emotional messaging platform where letters unlock based on real-world triggers \u2014 location, time, mood, and weather. Built with React Native and Expo, deployed on Vercel.",
+          tools: "Node.js, React Native, Expo, Vercel",
+          image: "",
+          link: "",
+          demo: "https://when-beta-signups.vercel.app/",
+          category: "web",
+          featured: true
+        },
         {
           title: "BrandKit Generator",
           videoUrl: "videos/brand.mp4",
           description:
             "A SaaS application that helps users create business assets like business cards, flyers, and social media posts using AI and a powerful canvas creation tool.",
-          tools: "Next.js, Tailwind CSS, Vercel, AI Integration",
+          tools: "Next.js, Tailwind CSS, Vercel, AI",
           image:
-            "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+            "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
           link: "",
           demo: "https://brand-kit-generator-qi9e.vercel.app/",
+          category: "web"
         },
         {
           title: "Language Learning App",
           videoUrl: "videos/learn.mp4",
           description:
-            "Language learning app modeled by duolingo, hey japan. supports multilanguage+ai functionality.",
+            "Language learning app modeled after Duolingo and Hey Japan. Supports multi-language + AI functionality.",
           tools: "HTML, CSS, JavaScript, Flask, OpenAI",
           image: "images/learning.png",
           link: "",
           demo: "https://bayan-app.netlify.app/",
+          category: "web"
+        },
+        {
+          title: "Quake 2 Castlevania Mod",
+          videoUrl: "videos/quake2.mp4",
+          description:
+            "A Quake 2 source-code mod adding Castlevania elements: whip as main weapon plus bottle and axe sub-weapons, backdash and super jump movement, a magic system that drains hearts, and enemy heart drops. Includes item crashes for sub-weapons. 3D assets created in Blender.",
+          tools: "C, Blender",
+          image: "images/castlevaniaquake.png",
+          link: "https://github.com/mwagg22/it-266-quake2",
+          category: "game"
         },
         {
           title: "3D Vulkan RPG",
           videoUrl: "videos/3d.mp4",
           description:
-            "3D action RPG created using Vulkan graphics API with advanced rendering techniques.",
-          tools: "C, Vulkan, SDL",
+            "3D action RPG created using Vulkan graphics API with advanced rendering techniques. 3D assets modeled in Blender.",
+          tools: "C, Vulkan, SDL, Blender",
           image: "images/3d.png",
           link: "https://github.com/mwagg22/IT485-Action-RPG-Vulkan",
+          category: "game"
         },
         {
           title: "2D Megaman SDL Clone",
           videoUrl: "videos/2d.mp4",
           description:
-            "2D Megaman style game with smooth gameplay and challenging levels.",
-          tools: "C, SDL",
+            "2D Megaman-style game with smooth gameplay and challenging levels. Sprites and art created with LibreSprite.",
+          tools: "C, SDL, LibreSprite",
           image: "images/2d.png",
           link: "https://github.com/mwagg22/IT-276-2d-Shooter-SDL",
-        },
-        {
-          title: "Text Replacer Chrome Extension",
-          videoUrl: "videos/translator.mp4",
-          description:
-            "Chrome extension to transcribe words using JSON key-value mapping system.",
-          tools: "Node.js, JavaScript",
-          image: "images/translator.png",
-          link: "https://github.com/mwagg22/chrome-translator",
-        },
-        {
-          title: "3D Ant Simulation",
-          videoUrl: "videos/ants.mp4",
-          description:
-            "Ant simulation to replicate movement and behavior in different environmental scenarios.",
-          tools: "C++, OpenGL",
-          image: "images/ants.png",
-          link: "",
+          category: "game"
         },
         {
           title: "Quake 4 Spyro Mod",
           videoUrl: "videos/spyro.mp4",
           description:
-            "A 3D mod for Quake 4 featuring Spyro the Dragon characters and gameplay elements.",
-          tools: "C++, ID Engine 4",
+            "A 3D mod for Quake 4 featuring Spyro the Dragon characters and gameplay elements. 3D assets created in Blender.",
+          tools: "C++, ID Engine 4, Blender",
           image: "images/mod.png",
           link: "https://github.com/mwagg22/it-266-Quake4-Mod",
+          category: "game"
+        },
+        {
+          title: "3D Ant Simulation",
+          videoUrl: "videos/ants.mp4",
+          description:
+            "Ant simulation to replicate movement and behavior in different environmental scenarios using OpenGL.",
+          tools: "C++, OpenGL",
+          image: "images/ants.png",
+          link: "",
+          category: "game"
+        },
+        {
+          title: "Text Replacer Chrome Extension",
+          videoUrl: "videos/translator.mp4",
+          description:
+            "Chrome extension to transcribe words using a JSON key-value mapping system.",
+          tools: "Node.js, JavaScript",
+          image: "images/translator.png",
+          link: "https://github.com/mwagg22/chrome-translator",
+          category: "tools"
         },
         {
           title: "Instagram Bot",
@@ -752,6 +930,7 @@
           tools: "Python, Selenium",
           image: "images/bot.png",
           link: "https://github.com/mwagg22/igbot",
+          category: "tools"
         },
         {
           title: "Sonic OpenGym ML",
@@ -761,193 +940,213 @@
           tools: "Python, OpenAI Gym",
           image: "images/sonic.png",
           link: "",
-        },
+          category: "ai"
+        }
       ];
 
-      // Function to create project cards
-      function createProjectCards() {
-        const container = document.getElementById("projects-container");
+      // Category colors
+      var categoryColors = {
+        web: { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/20", label: "Web App" },
+        game: { bg: "bg-green-500/10", text: "text-green-400", border: "border-green-500/20", label: "Game Dev" },
+        ai: { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/20", label: "AI / ML" },
+        tools: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/20", label: "Tool" }
+      };
 
-        projects.forEach((project) => {
-          const card = document.createElement("div");
-          card.classList.add(
-            "project-card",
-            "card-gradient",
-            "rounded-2xl",
-            "overflow-hidden"
-          );
+      function createProjectCards(filterCategory) {
+        if (!filterCategory) filterCategory = "all";
+        var container = document.getElementById("projects-container");
+        container.innerHTML = "";
 
-          card.innerHTML = `
-            <div class="h-48 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center relative overflow-hidden">
-              <div class="absolute inset-0 bg-black/20"></div>
-              <img src="${project.image}" alt="${
-            project.title
-          }" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <h3 class="absolute bottom-4 left-4 text-xl font-bold text-white">${
-                project.title
-              }</h3>
-            </div>
-            <div class="p-6">
-              <p class="text-slate-300 mb-4 line-clamp-3">${
-                project.description
-              }</p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                ${project.tools
-                  .split(", ")
-                  .map(
-                    (tool) =>
-                      `<span class="bg-slate-700 text-slate-300 text-xs px-3 py-1 rounded-full">${tool}</span>`
-                  )
-                  .join("")}
-              </div>
-              <p class="text-blue-400 text-sm">Click to see more details</p>
-            </div>
-          `;
+        var filtered = filterCategory === "all"
+          ? projects.filter(function(p) { return !p.featured; })
+          : projects.filter(function(p) { return p.category === filterCategory && !p.featured; });
 
-          // Add click event to show modal
-          card.addEventListener("click", () => {
-            showModal(project);
-          });
+        var placeholderGradients = [
+          "from-indigo-600 to-purple-600",
+          "from-cyan-600 to-blue-600",
+          "from-pink-600 to-rose-600",
+          "from-emerald-600 to-teal-600",
+          "from-amber-600 to-orange-600"
+        ];
 
+        filtered.forEach(function(project, i) {
+          var cat = categoryColors[project.category] || categoryColors.web;
+          var card = document.createElement("div");
+          var delayClass = i < 3 ? " reveal-delay-" + (i + 1) : "";
+          card.className = "project-card glass-card rounded-2xl overflow-hidden cursor-pointer reveal" + delayClass;
+
+          var grad = placeholderGradients[i % placeholderGradients.length];
+
+          var imageSection = project.image
+            ? '<img src="' + project.image + '" alt="' + project.title + '" class="w-full h-full object-cover project-image" />'
+            : '<div class="w-full h-full bg-gradient-to-br ' + grad + ' flex items-center justify-center project-image"><i class="fas fa-code text-4xl text-white/30"></i></div>';
+
+          var toolsHtml = project.tools.split(", ").map(function(tool) {
+            return '<span class="bg-white/5 text-slate-400 text-[10px] px-2.5 py-1 rounded-full border border-white/5 font-medium">' + tool + '</span>';
+          }).join("");
+
+          card.innerHTML =
+            '<div class="h-48 relative overflow-hidden">' +
+              imageSection +
+              '<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>' +
+              '<div class="absolute top-3 right-3">' +
+                '<span class="text-[10px] font-bold px-2.5 py-1 rounded-full ' + cat.bg + ' ' + cat.text + ' border ' + cat.border + ' uppercase tracking-wider">' + cat.label + '</span>' +
+              '</div>' +
+              '<h3 class="absolute bottom-3 left-4 right-4 text-lg font-bold text-white leading-snug">' + project.title + '</h3>' +
+            '</div>' +
+            '<div class="p-5">' +
+              '<p class="text-slate-400 text-sm mb-4 line-clamp-2 leading-relaxed">' + project.description + '</p>' +
+              '<div class="flex flex-wrap gap-1.5 mb-4">' + toolsHtml + '</div>' +
+              '<p class="text-brand-400 text-xs font-medium flex items-center gap-1"><i class="fas fa-expand-alt"></i> Click for details</p>' +
+            '</div>';
+
+          card.addEventListener("click", function() { showModal(project); });
           container.appendChild(card);
         });
+
+        setTimeout(function() { observeReveals(); }, 50);
       }
 
-      // Function to show project modal
+      // Show modal
       function showModal(project) {
-        const modal = document.getElementById("modal");
-        const modalVideo = document.getElementById("modal-video");
-        const modalTitle = document.getElementById("modal-title");
-        const modalDescription = document.getElementById("modal-description");
-        const modalTools = document.getElementById("modal-tools");
-        const modalLinks = document.getElementById("modal-links");
+        var modal = document.getElementById("modal");
+        var modalVideo = document.getElementById("modal-video");
+        var modalTitle = document.getElementById("modal-title");
+        var modalDesc = document.getElementById("modal-description");
+        var modalTools = document.getElementById("modal-tools");
+        var modalLinks = document.getElementById("modal-links");
 
         modalTitle.textContent = project.title;
-        modalDescription.textContent = project.description;
+        modalDesc.textContent = project.description;
         modalTools.textContent = project.tools;
 
-        // Set up video
         if (project.videoUrl) {
           modalVideo.src = project.videoUrl;
           modalVideo.style.display = "block";
         } else {
           modalVideo.style.display = "none";
+          modalVideo.src = "";
         }
 
-        // Set up links
         modalLinks.innerHTML = "";
         if (project.link) {
-          const githubLink = document.createElement("a");
-          githubLink.href = project.link;
-          githubLink.target = "_blank";
-          githubLink.className = "modal-link github";
-          githubLink.innerHTML = '<i class="fab fa-github"></i> View Code';
-          modalLinks.appendChild(githubLink);
+          var a = document.createElement("a");
+          a.href = project.link;
+          a.target = "_blank";
+          a.className = "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 text-sm font-medium transition-all border border-white/10";
+          a.innerHTML = '<i class="fab fa-github"></i> View Code';
+          modalLinks.appendChild(a);
         }
-
         if (project.demo) {
-          const demoLink = document.createElement("a");
-          demoLink.href = project.demo;
-          demoLink.target = "_blank";
-          demoLink.className = "modal-link";
-          demoLink.innerHTML =
-            '<i class="fas fa-external-link-alt"></i> Live Demo';
-          modalLinks.appendChild(demoLink);
+          var a2 = document.createElement("a");
+          a2.href = project.demo;
+          a2.target = "_blank";
+          a2.className = "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium transition-all shadow-lg shadow-brand-600/25";
+          a2.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo';
+          modalLinks.appendChild(a2);
         }
 
-        modal.style.display = "block";
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
-      // Mobile menu toggle
-      document
-        .getElementById("mobile-menu-button")
-        .addEventListener("click", function () {
-          const mobileMenu = document.getElementById("mobile-menu");
-          mobileMenu.classList.toggle("hidden");
-        });
+      function closeModal() {
+        var modal = document.getElementById("modal");
+        var modalVideo = document.getElementById("modal-video");
+        modal.classList.remove("active");
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        modalVideo.src = "";
+        document.body.style.overflow = "";
+      }
 
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll("#mobile-menu a").forEach((link) => {
-        link.addEventListener("click", () => {
-          document.getElementById("mobile-menu").classList.add("hidden");
+      // Category Filter
+      function initCategoryFilter() {
+        document.querySelectorAll(".category-pill").forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            document.querySelectorAll(".category-pill").forEach(function(b) { b.classList.remove("active"); });
+            btn.classList.add("active");
+            createProjectCards(btn.dataset.category);
+          });
         });
-      });
+      }
 
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
+      // Scroll Reveal
+      function observeReveals() {
+        var observer = new IntersectionObserver(
+          function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+              }
             });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        document.querySelectorAll(".reveal:not(.visible)").forEach(function(el) {
+          observer.observe(el);
+        });
+      }
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener("click", function(e) {
+          e.preventDefault();
+          var target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            document.getElementById("mobile-menu").classList.add("hidden");
           }
         });
       });
 
-      // Create floating particles
-      function createParticles() {
-        const container = document.getElementById("particles-container");
-        const particleCount = 30;
-
-        for (let i = 0; i < particleCount; i++) {
-          const particle = document.createElement("div");
-          particle.classList.add("particle");
-
-          // Random size and position
-          const size = Math.random() * 5 + 2;
-          const posX = Math.random() * 100;
-          const posY = Math.random() * 100;
-
-          particle.style.width = `${size}px`;
-          particle.style.height = `${size}px`;
-          particle.style.left = `${posX}%`;
-          particle.style.top = `${posY}%`;
-
-          // Random animation
-          const duration = Math.random() * 20 + 10;
-          particle.style.animation = `float ${duration}s infinite linear`;
-
-          container.appendChild(particle);
-        }
-      }
-
-      // Contact form submission
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          alert("Thank you for your message! I'll get back to you soon.");
-          this.reset();
-        });
-
-      // Modal functionality
-      const modal = document.getElementById("modal");
-      const closeBtn = document.querySelector(".close");
-
-      closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        const modalVideo = document.getElementById("modal-video");
-        modalVideo.pause();
-        modalVideo.currentTime = 0;
+      // Mobile Menu
+      document.getElementById("mobile-menu-btn").addEventListener("click", function() {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
       });
 
-      window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-          modal.style.display = "none";
-          const modalVideo = document.getElementById("modal-video");
-          modalVideo.pause();
-          modalVideo.currentTime = 0;
+      // Modal Controls
+      document.getElementById("modal-close-btn").addEventListener("click", closeModal);
+      document.getElementById("modal").addEventListener("click", function(e) {
+        if (e.target === document.getElementById("modal")) closeModal();
+      });
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") closeModal();
+      });
+
+      // Navbar Scroll Effect
+      window.addEventListener("scroll", function() {
+        var navbar = document.getElementById("navbar");
+        if (window.pageYOffset > 100) {
+          navbar.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
+        } else {
+          navbar.style.borderBottom = "none";
         }
       });
 
-      // Initialize on page load
-      window.addEventListener("DOMContentLoaded", () => {
-        createParticles();
+      // Contact Form
+      document.getElementById("contact-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        var btn = this.querySelector('button[type="submit"]');
+        btn.innerHTML = '<i class="fas fa-check mr-2"></i> Message Sent!';
+        btn.classList.remove("bg-brand-600", "hover:bg-brand-500");
+        btn.classList.add("bg-green-600");
+        var form = this;
+        setTimeout(function() {
+          btn.innerHTML = 'Send Message <i class="fas fa-arrow-right ml-2"></i>';
+          btn.classList.remove("bg-green-600");
+          btn.classList.add("bg-brand-600", "hover:bg-brand-500");
+          form.reset();
+        }, 3000);
+      });
+
+      // Init
+      window.addEventListener("DOMContentLoaded", function() {
+        renderSkills();
         createProjectCards();
+        initCategoryFilter();
+        observeReveals();
       });
     </script>
   </body>
